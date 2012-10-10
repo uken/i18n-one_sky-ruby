@@ -17,16 +17,11 @@ module I18n
 
           i18n_locale_code = locale_os_to_i18n(locale_code)
 
-          if locale_code == platform_base_locale
-            # we skip the base
-            next
-          else
-            yaml = platform.translation.download_yaml(locale_code)
-            if yaml.present?
-              YAML.load(yaml).each do |code, translations|
-                active_record_backend.store_translations(i18n_locale_code, translations)
-                puts "  locale: #{i18n_locale_code}, count: #{translation_scope(i18n_locale_code).count}"
-              end
+          yaml = platform.translation.download_yaml(locale_code)
+          if yaml.present?
+            YAML.load(yaml).each do |code, translations|
+              active_record_backend.store_translations(i18n_locale_code, translations)
+              puts "  locale: #{i18n_locale_code}, count: #{translation_scope(i18n_locale_code).count}"
             end
           end
         end
