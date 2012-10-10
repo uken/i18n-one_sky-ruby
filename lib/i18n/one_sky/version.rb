@@ -1,5 +1,5 @@
 module I18n
   module Onesky
-    VERSION = "2.0.11"
+    VERSION = "2.0.10.uken.3"
   end
 end
