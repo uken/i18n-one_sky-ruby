@@ -162,6 +162,16 @@ again to regenerate your config.
         case locale
         when "en_US"
           "en"
+        when "fr_FR"
+          "fr"
+        when "ru_RU"
+          "ru"
+        when "es_LA"
+          "es"
+        when "it_IT"
+          "it"
+        when "pt_PT"
+          "pt"
         else
           locale
         end
@@ -171,6 +181,16 @@ again to regenerate your config.
         case locale.to_s
         when "en"
           "en_US"
+        when "fr"
+          "fr_FR"
+        when "ru"
+          "ru_RU"
+        when "es"
+          "es_LA"
+        when "it"
+          "it_IT"
+        when "pt"
+          "pt_PT"
         else
           locale.to_s
         end
