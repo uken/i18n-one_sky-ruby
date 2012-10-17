@@ -30,15 +30,14 @@ RSpec::Core::RakeTask.new("spec:live") do |t|
   t.rspec_opts = %w{--tag live}
 end
 
-
-######
-# Uken Gem uploading
-###
 require 'yaml'
 require 'stickler'
 require 'stickler/client'
 
-namespace :oneskygem do
+desc 'Builds and pushes the gem'
+task :gem => ['gem:build', 'gem:push']
+
+namespace :gem do
   UKEN_GEM_SERVER = "http://gems.uken.com"
   def gemspec_file; Dir["*.gemspec"].first; end
   def gemspec; eval File.read(gemspec_file); end
@@ -52,10 +51,10 @@ namespace :oneskygem do
   desc "Build #{name}-#{version}.gem into the pkg directory"
   task :build do
     system <<-COMMAND
-      mkdir -p pkg
-      gem build #{gemspec_file} -q
-      mv *.gem pkg
-    COMMAND
+mkdir -p pkg
+gem build #{gemspec_file} -q
+mv *.gem pkg
+COMMAND
   end
 
   desc "Create tag #{version_tag} and build and push #{name}-#{version}.gem to Uken gemserver"
@@ -65,6 +64,3 @@ namespace :oneskygem do
     ohai "Don't forget to 'git push --tags'"
   end
 end
-
-desc 'Builds and pushes the gem'
-task :oneskygem => ['oneskygem:build', 'oneskygem:push']
