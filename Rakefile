@@ -30,7 +30,6 @@ RSpec::Core::RakeTask.new("spec:live") do |t|
   t.rspec_opts = %w{--tag live}
 end
 
-
 require 'yaml'
 require 'stickler'
 require 'stickler/client'
